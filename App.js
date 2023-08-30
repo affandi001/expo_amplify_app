@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+/* eslint-disable react/no-unstable-nested-components */
+import React from 'react';
+import {Authenticator} from '@aws-amplify/ui-react-native';
+import {Amplify} from 'aws-amplify';
+import awsconfig from './aws-exports';
+import HomeScreen from './src/screens/home';
+Amplify.configure(awsconfig);
 
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Authenticator.Provider>
+      <Authenticator signUpAttributes={[]}>
+        <HomeScreen />
+      </Authenticator>
+    </Authenticator.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
